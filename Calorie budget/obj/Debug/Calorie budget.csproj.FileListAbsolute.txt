@@ -11,3 +11,16 @@ C:\Users\Andre\source\repos\Calorie budget\Calorie budget\obj\Debug\Calorie budg
 C:\Users\Andre\source\repos\Calorie budget\Calorie budget\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Andre\source\repos\Calorie budget\Calorie budget\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Andre\source\repos\Calorie budget\Calorie budget\obj\Debug\Calorie budget.csproj.CopyComplete
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\bin\Debug\Calorie budget.exe.config
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\bin\Debug\Calorie budget.exe
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\bin\Debug\Calorie budget.pdb
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie budget.csprojAssemblyReference.cache
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie_budget.Form1.resources
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie_budget.Properties.Resources.resources
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie budget.csproj.GenerateResource.cache
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie budget.csproj.CoreCompileInputs.cache
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie budget.csproj.CopyComplete
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie budget.exe
+C:\Users\Andre\source\repos\CalorieBank\Calorie budget\obj\Debug\Calorie budget.pdb
