@@ -24,7 +24,6 @@ namespace Calorie_budget
         {
             InitializeComponent();
             __initialize__();
-            //__LoadFile__();
             __LoadData__();
             lblNotification.Text = "";
         }
@@ -127,62 +126,12 @@ namespace Calorie_budget
             return false;
         }
 
-        /* private void __LoadFile__()
-        {
-            this.now = DateTime.Now;
-            this.path = $"C:\\Users\\Documents\\WeightCalculator\\Calorie-Count-{this.now.Month}-{this.now.Year}\\{this.now.Day}.txt";
-            lblNotification.Text = "";
-
-            if(!Directory.Exists($"C:\\OneDrive\\Documents\\WeightCalculator\\Calorie-Count-{this.now.Month}-{this.now.Year}"))
-            {
-                Directory.CreateDirectory($"C:\\OneDrive\\Documents\\WeightCalculator\\Calorie-Count-{this.now.Month}-{this.now.Year}");
-            }
-
-            if (!File.Exists(this.path))
-            {
-                using (StreamWriter sw = File.CreateText(this.path))
-                {
-                    sw.WriteLine($"Calorie counter {this.now.Month}-{this.now.Year}");
-                    sw.WriteLine(deficet.ToString());
-                }
-            }
-
-            using (StreamReader sr = File.OpenText(this.path))
-            {
-                string s;
-                //string text = "";
-                for (int i = 0; (s = sr.ReadLine()) != null; i++)
-                {
-                    //text += s + "\n";
-                    if(i == 0)
-                    {
-                        this.Text = s;
-                    }
-                    if(i == 1)
-                    {
-                        this.deficet = int.Parse(s);
-                    };
-                }
-                //txtDisplay.Text = text;
-            }
-        }
-        */
-
         private void __LoadData__()
         {
             int calorieBalanece = (this.defaultCalories + this.data.caloriesEarned) - this.data.caloriesBurned;
 
             lblCalorieBalance.Text = $"Calorie Balance: {calorieBalanece}cal";
         }
-
-        /*private void __WriteData__()
-        {
-            using (StreamWriter sw = File.CreateText(this.path))
-            {
-                sw.WriteLine($"Calorie counter {this.now.Month}-{this.now.Year}");
-                sw.WriteLine(deficet.ToString());
-            }
-        }*/
 
         private void __ReadData__(string selectedPath)
         {
@@ -210,7 +159,6 @@ namespace Calorie_budget
 
             this.data.caloriesBurned += calorie;
             __LoadData__();
-            //__WriteData__();
         }
         private void btnDebug_Click(object sender, EventArgs e)
         {
