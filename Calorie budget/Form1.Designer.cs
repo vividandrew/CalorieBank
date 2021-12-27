@@ -36,6 +36,9 @@ namespace Calorie_budget
             this.btnAddCalories = new System.Windows.Forms.Button();
             this.lblNotification = new System.Windows.Forms.Label();
             this.btnLibraryAdd = new System.Windows.Forms.Button();
+            this.btnCalEarned = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCalEarned = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnDebug
@@ -104,11 +107,40 @@ namespace Calorie_budget
             this.btnLibraryAdd.UseVisualStyleBackColor = true;
             this.btnLibraryAdd.Click += new System.EventHandler(this.btnLibraryAdd_Click);
             // 
+            // btnCalEarned
+            // 
+            this.btnCalEarned.Location = new System.Drawing.Point(237, 128);
+            this.btnCalEarned.Name = "btnCalEarned";
+            this.btnCalEarned.Size = new System.Drawing.Size(100, 21);
+            this.btnCalEarned.TabIndex = 10;
+            this.btnCalEarned.Text = "Add Calories";
+            this.btnCalEarned.UseVisualStyleBackColor = true;
+            this.btnCalEarned.Click += new System.EventHandler(this.btnCalEarned_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(131, 105);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Calories earned:";
+            // 
+            // txtCalEarned
+            // 
+            this.txtCalEarned.Location = new System.Drawing.Point(237, 102);
+            this.txtCalEarned.Name = "txtCalEarned";
+            this.txtCalEarned.Size = new System.Drawing.Size(100, 20);
+            this.txtCalEarned.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 128);
+            this.ClientSize = new System.Drawing.Size(363, 160);
+            this.Controls.Add(this.btnCalEarned);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtCalEarned);
             this.Controls.Add(this.btnLibraryAdd);
             this.Controls.Add(this.lblNotification);
             this.Controls.Add(this.btnAddCalories);
@@ -117,7 +149,8 @@ namespace Calorie_budget
             this.Controls.Add(this.lblCalorieBalance);
             this.Controls.Add(this.btnDebug);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Calorie Bank";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,6 +165,9 @@ namespace Calorie_budget
         private System.Windows.Forms.Button btnAddCalories;
         private System.Windows.Forms.Label lblNotification;
         private System.Windows.Forms.Button btnLibraryAdd;
+        private System.Windows.Forms.Button btnCalEarned;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCalEarned;
     }
 
     public class CalorieData
@@ -141,16 +177,22 @@ namespace Calorie_budget
             get;
             set;
         }
-        public int calories
+        public int caloriesBurned
+        {
+            get;
+            set;
+        }
+        public int caloriesEarned
         {
             get;
             set;
         }
 
-        public CalorieData(System.DateTime date, int calories)
+        public CalorieData(System.DateTime date, int caloriesBurned, int caloriesEarned)
         {
             this.date = date;
-            this.calories = calories;
+            this.caloriesBurned = caloriesBurned;
+            this.caloriesEarned = caloriesEarned;
         }
     }
 }

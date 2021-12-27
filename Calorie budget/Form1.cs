@@ -15,6 +15,7 @@ namespace Calorie_budget
 {
     public partial class Form1 : Form
     {
+        int defaultCalories = 1961;
         DateTime now;
         CalorieData data;
         string[] months = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
@@ -25,14 +26,14 @@ namespace Calorie_budget
             __initialize__();
             //__LoadFile__();
             __LoadData__();
-
+            lblNotification.Text = "";
         }
 
         private void __initialize__()
         {
             this.now = DateTime.Now;
 
-            this.data  = new CalorieData(this.now, 0);
+            this.data  = new CalorieData(this.now, 0, 0);
             string path = Directory.GetCurrentDirectory();
             path += $"\\Storage\\Calorie-Count-{months[this.now.Month]}-{this.now.Year}.xml";
 
@@ -40,7 +41,7 @@ namespace Calorie_budget
             {
                 if (!loadFromXML(path))
                 {
-                    addtoXML(0, this.now.Day, path);
+                    addtoXML(0, 0, this.now.Day, path);
                 }
             }
             else
@@ -58,7 +59,8 @@ namespace Calorie_budget
             xmlWriter.WriteStartElement(months[this.now.Month]);
 
             xmlWriter.WriteStartElement("caloriesdata");
-            xmlWriter.WriteAttributeString("calories", this.data.calories.ToString());
+            xmlWriter.WriteAttributeString("calories_burned", this.data.caloriesBurned.ToString());
+            xmlWriter.WriteAttributeString("calories_earned", this.data.caloriesEarned.ToString());
             xmlWriter.WriteAttributeString("day", this.data.date.Day.ToString());
             xmlWriter.WriteEndElement();
 
@@ -66,7 +68,7 @@ namespace Calorie_budget
             xmlWriter.Close();
         }
 
-        private void addtoXML(int calories, int day, string path)
+        private void addtoXML(int caloriesBurned, int caloriesEarned, int day, string path)
         {
             XDocument xDocument = XDocument.Load(path);
 
@@ -75,12 +77,13 @@ namespace Calorie_budget
             XElement lastRow = rows.Last();
             lastRow.AddAfterSelf(
                new XElement("caloriesdata",
-               new XAttribute("calories", calories),
+               new XAttribute("calories_earned", caloriesBurned),
+               new XAttribute("calories_burned", caloriesEarned),
                new XAttribute("day", day)));
             xDocument.Save(path);
         }
 
-        private void updateXML(int calories, int day, string path)
+        private void updateXML(int caloriesBurned, int caloriesEarned, int day, string path)
         {
 
             int comp;
@@ -92,7 +95,8 @@ namespace Calorie_budget
                 {
                     if (comp == day)
                     {
-                        xe.Attribute("calories").SetValue(calories.ToString());
+                        xe.Attribute("calories_burned").SetValue(caloriesBurned.ToString());
+                        xe.Attribute("calories_earned").SetValue(caloriesEarned.ToString());
                     }
                 }
             }
@@ -113,7 +117,8 @@ namespace Calorie_budget
                 int comp = int.Parse(xe.GetAttribute("day"));
                 if (comp == this.now.Day)
                 {
-                    this.data.calories = int.Parse(xe.GetAttribute("calories"));
+                    this.data.caloriesBurned = int.Parse(xe.GetAttribute("calories_burned"));
+                    this.data.caloriesEarned = int.Parse(xe.GetAttribute("calories_earned"));
                     __LoadData__();
                     return true;
                 }
@@ -165,7 +170,7 @@ namespace Calorie_budget
 
         private void __LoadData__()
         {
-            int calorieBalanece = 1961 - this.data.calories;
+            int calorieBalanece = (this.defaultCalories + this.data.caloriesEarned) - this.data.caloriesBurned;
 
             lblCalorieBalance.Text = $"Calorie Balance: {calorieBalanece}cal";
         }
@@ -203,11 +208,9 @@ namespace Calorie_budget
 
             lblNotification.Text = $"You have added {item}";
 
-            this.data.calories += calorie;
+            this.data.caloriesBurned += calorie;
             __LoadData__();
             //__WriteData__();
-
-
         }
         private void btnDebug_Click(object sender, EventArgs e)
         {
@@ -222,9 +225,9 @@ namespace Calorie_budget
 
             if (int.TryParse(txtAddDeficet.Text.Trim(), out deduct))
             {
-                this.data.calories += deduct;
+                this.data.caloriesBurned += deduct - this.data.caloriesEarned;
                 __LoadData__();
-                updateXML(this.data.calories, this.now.Day, path);
+                updateXML(this.data.caloriesBurned, this.data.caloriesEarned, this.now.Day, path);
             }
             else
             {
@@ -247,6 +250,29 @@ namespace Calorie_budget
                 __ReadData__(library.FileName);
             }
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCalEarned_Click(object sender, EventArgs e)
+        {
+            int earned = 0;
+            string path = Directory.GetCurrentDirectory();
+            path += $"\\Storage\\Calorie-Count-{months[this.now.Month]}-{this.now.Year}.xml";
+
+            if (int.TryParse(txtAddDeficet.Text.Trim(), out earned))
+            {
+                this.data.caloriesEarned = earned;
+                __LoadData__();
+                updateXML(this.data.caloriesBurned, this.data.caloriesEarned, this.now.Day, path);
+            }
+            else
+            {
+                MessageBox.Show("Data entered was not a number, please use a number");
+            }
         }
     }
 }
