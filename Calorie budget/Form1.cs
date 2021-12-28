@@ -173,7 +173,7 @@ namespace Calorie_budget
 
             if (int.TryParse(txtAddDeficet.Text.Trim(), out deduct))
             {
-                this.data.caloriesBurned += deduct - this.data.caloriesEarned;
+                this.data.caloriesBurned += deduct;
                 __LoadData__();
                 updateXML(this.data.caloriesBurned, this.data.caloriesEarned, this.now.Day, path);
             }
@@ -211,9 +211,9 @@ namespace Calorie_budget
             string path = Directory.GetCurrentDirectory();
             path += $"\\Storage\\Calorie-Count-{months[this.now.Month]}-{this.now.Year}.xml";
 
-            if (int.TryParse(txtAddDeficet.Text.Trim(), out earned))
+            if (int.TryParse(txtCalEarned.Text.Trim(), out earned))
             {
-                this.data.caloriesEarned = earned;
+                this.data.caloriesEarned += earned;
                 __LoadData__();
                 updateXML(this.data.caloriesBurned, this.data.caloriesEarned, this.now.Day, path);
             }
